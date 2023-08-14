@@ -1,7 +1,7 @@
 #include "lib_funcs.h"
 /**
  * sigint_handler - handle sigint.
- * @sigint: integer.
+ * @signum: integer.
  * Return: nothing.
  */
 void sigint_handler(int signum)

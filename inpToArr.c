@@ -2,7 +2,7 @@
 
 /**
  * inpToArray - input to array
- * @input: Input
+ * @inp: Input
  * Return: arr
  */
 

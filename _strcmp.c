@@ -1,6 +1,6 @@
 #include "lib_funcs.h"
 /**
- * _sterlen - compares two strings.
+ * _strcmp - compares two strings.
  * @s1: first string
  * @s2: second string.
 * Return: integer.

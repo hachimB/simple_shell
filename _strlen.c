@@ -1,6 +1,6 @@
 #include "lib_funcs.h"
 /**
- * _sterlen - return the number of element of string.
+ * _strlen - return the number of element of string.
  * @s: string
  * Return: integer.
  */
