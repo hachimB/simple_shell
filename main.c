@@ -5,13 +5,21 @@
  * @argv: Arguments
  * Return: 0 Success
  */
+
+char *_input_line_;
+
+void initializeGlobals() {
+    _input_line_ = NULL;
+}
+
 int main(int argc, char **argv)
 {
         pid_t p;
         size_t n = 0;
         ssize_t l;
-	char *lineptr = NULL;
         char **args, *env[1] = {NULL};
+
+	initializeGlobals();
 
         signal(SIGINT, sigint_handler);
 
@@ -29,7 +37,7 @@ int main(int argc, char **argv)
                         exit(1);
                 }
 
-                if ((l = getline(&lineptr, &n, stdin)) == -1)
+                if ((l = getline(&_input_line_, &n, stdin)) == -1)
                 {
                         if(write(STDOUT_FILENO, "\n", 1) < 0)
                         {
@@ -37,18 +45,18 @@ int main(int argc, char **argv)
                                 exit(1);
                         }
 
-                        free(lineptr);
+                        free(_input_line_);
                         exit(1);
                 }
 
-                lineptr[l - 1] = '\0';
+                _input_line_[l - 1] = '\0';
 
-                args = inpToArray(lineptr);
+                args = inpToArray(_input_line_);
 
-                if (_strcmp("exit", lineptr) == 0)
+                if (_strcmp("exit", _input_line_) == 0)
                 {
                         free(args);
-                        free(lineptr);
+                        free(_input_line_);
                         exit(0);
                 }
 
@@ -58,7 +66,7 @@ int main(int argc, char **argv)
                 {
                         perror("Fork");
                         free(args);
-                        free(lineptr);
+                        free(_input_line_);
                         exit(1);
                 }
 
@@ -66,12 +74,12 @@ int main(int argc, char **argv)
                         /*args[0] = lineptr;
                         args[1] = NULL;*/
 
-                        if(execve(lineptr, args, env) == -1)
+                        if(execve(_input_line_, args, env) == -1)
                                 perror(argv[0]);
 
                         free(args);
-                        free(lineptr);
-                        lineptr = NULL;
+                        free(_input_line_);
+                        _input_line_ = NULL;
                         exit(127);
                 }
                 else
@@ -83,8 +91,8 @@ int main(int argc, char **argv)
                         }
 
                         free(args);
-                        free(lineptr);
-                        lineptr = NULL;
+                        free(_input_line_);
+                        _input_line_ = NULL;
                 }
 
         }

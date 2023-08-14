@@ -6,10 +6,9 @@
  */
 void sigint_handler(int signum)
 {
-char *lineptr = NULL;
 (void)signum;
-if (lineptr)
-free(lineptr);
+if (_input_line_)
+free(_input_line_);
 write(STDOUT_FILENO, "\n", 1);
 exit(1);
 }
