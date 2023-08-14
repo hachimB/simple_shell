@@ -69,10 +69,6 @@ int _strlen(char *s)
         while (s[i] != '\0')
                 i++;
         return (i);
-	int i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
 }
 
 char *_strcat(char *dest, char *src)
@@ -95,21 +91,6 @@ char *_strcat(char *dest, char *src)
 
         dest[i] = '\0';
         return (dest);
-	int i = 0;
-	int j = 0;
-	while (dest[i] != '\0')
-	{
-	i++;
-	}
-
-	while (src[j] != '\0')
-	{
-		dest[i] = src[j];
-		i++;
-		j++;
-	}
-	dest[i] = '\0';
-	return (dest);
 }
 
 #endif
