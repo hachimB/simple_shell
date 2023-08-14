@@ -13,7 +13,7 @@ char **inpToArray(char *inp)
 
         while (*i)
         {
-                if (*i == ' ')
+                if (*i == ' ' && *(i + 1) != ' ' && *(i + 1) != '\0')
                         n++;
                 i++;
         }
@@ -21,15 +21,14 @@ char **inpToArray(char *inp)
         tokn = strtok(inp, _sp);
 
         arr = malloc(sizeof(char *) * (n + 1));
+	
+	if (!arr)
+		return (NULL);
 
         while (tokn)
         {
-		if (_strcmp(tokn, " ") != 0)
-		{
-                	arr[c] = tokn;
-                	c++;
-		}
-
+                arr[c] = tokn;
+                c++;
                 tokn = strtok(NULL, _sp);
         }
         arr[0] = inp;

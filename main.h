@@ -11,6 +11,7 @@
 
 
 extern char *_input_line_;
+extern char **environ;
 
 void sigint_handler(int signum);
 int _strlen(char *s);

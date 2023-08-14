@@ -6,8 +6,6 @@
  * Return: 0 Success
  */
 
-extern **environ;
-
 char *_input_line_;
 
 void initializeGlobals() {
