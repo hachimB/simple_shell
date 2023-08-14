@@ -6,6 +6,8 @@
  * Return: 0 Success
  */
 
+extern **environ;
+
 char *_input_line_;
 
 void initializeGlobals() {
@@ -17,7 +19,7 @@ int main(int argc, char **argv)
         pid_t p;
         size_t n = 0;
         ssize_t l;
-        char **args, *env[1] = {NULL};
+        char **args;
 
 	initializeGlobals();
 
@@ -71,10 +73,7 @@ int main(int argc, char **argv)
                 }
 
                 if (p == 0) {
-                        /*args[0] = lineptr;
-                        args[1] = NULL;*/
-
-                        if(execve(_input_line_, args, env) == -1)
+                        if(execve(_input_line_, args, environ) == -1)
                                 perror(argv[0]);
 
                         free(args);

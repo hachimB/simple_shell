@@ -24,8 +24,12 @@ char **inpToArray(char *inp)
 
         while (tokn)
         {
-                arr[c] = tokn;
-                c++;
+		if (_strcmp(tokn, " ") != 0)
+		{
+                	arr[c] = tokn;
+                	c++;
+		}
+
                 tokn = strtok(NULL, _sp);
         }
         arr[0] = inp;
