@@ -9,7 +9,6 @@
 
 void sigint_handler(int signum) {
     (void)signum;
-    
     if (lineptr)
 	    free(lineptr);
 
@@ -23,9 +22,7 @@ int main(int argc, char **argv)
 	size_t n = 0;
 	ssize_t l;
 	char **args, *env[1] = {NULL};
-	
 	signal(SIGINT, sigint_handler);
-	
 	if (argc != 1)
 {
 		perror("Arguments Error");
@@ -92,7 +89,6 @@ int main(int argc, char **argv)
 				perror("Wait");
 				exit(1);
 			}
-			
 			free(args);
 			free(lineptr);
 			lineptr = NULL;
