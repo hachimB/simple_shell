@@ -1,4 +1,4 @@
-#include "strfunc.h"
+#include "lib_funcs.h"
 /**
  * sigint_handler - handle sigint.
  * @sigint: integer.

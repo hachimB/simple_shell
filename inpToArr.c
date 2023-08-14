@@ -1,4 +1,4 @@
-#include "strfunc.h"
+#include "lib_funcs.h"
 
 /**
  * inpToArray - input to array

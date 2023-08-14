@@ -1,4 +1,4 @@
-#include "strfunc.h"
+#include "lib_funcs.h"
 /**
  * _sterlen - compares two strings.
  * @s1: first string

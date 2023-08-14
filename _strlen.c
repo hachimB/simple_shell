@@ -1,4 +1,4 @@
-#include "strfunc.h"
+#include "lib_funcs.h"
 /**
  * _sterlen - return the number of element of string.
  * @s: string
