@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
-
+#include <errno.h>
 
 extern char *_input_line_;
 extern char **environ;

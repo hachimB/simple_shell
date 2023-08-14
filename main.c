@@ -6,11 +6,6 @@
  * Return: 0 Success
  */
 
-char *_input_line_;
-
-void initializeGlobals() {
-    _input_line_ = NULL;
-}
 
 int main(int argc, char **argv)
 {
@@ -19,7 +14,7 @@ int main(int argc, char **argv)
         ssize_t l;
         char **args;
 
-	initializeGlobals();
+	char *_input_line_ = NULL;
 
         signal(SIGINT, sigint_handler);
 
@@ -39,14 +34,27 @@ int main(int argc, char **argv)
 
                 if ((l = getline(&_input_line_, &n, stdin)) == -1)
                 {
+			if (!_input_line_)
+			{
+				perror("Allocation failed");
+				exit(1);
+			}
+			if (errno != 0)
+			{
+				free(_input_line_);
+				perror("Error");
+				exit(1);
+			}
+
                         if(write(STDOUT_FILENO, "\n", 1) < 0)
                         {
                                 perror("Write");
+				free(_input_line);
                                 exit(1);
                         }
 
                         free(_input_line_);
-                        exit(1);
+                        exit(0);
                 }
 
                 _input_line_[l - 1] = '\0';
