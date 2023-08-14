@@ -7,19 +7,12 @@
  * Return: 0 Success
  */
 
-void sigint_handler(int signum) {
-    (void)signum;
-    if (lineptr)
-	    free(lineptr);
-
-    write(STDOUT_FILENO, "\n", 1);
-    exit(1);
-}
 
 int main(int argc, char **argv)
 {
 	pid_t p;
 	size_t n = 0;
+	char *lineptr = NULL;
 	ssize_t l;
 	char **args, *env[1] = {NULL};
 	signal(SIGINT, sigint_handler);
