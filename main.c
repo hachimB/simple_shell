@@ -62,9 +62,7 @@ int main(int argc, char **argv)
                         exit(1);
                 }
 
-                if (p == 0) {
-                        /*args[0] = lineptr;
-                        args[1] = NULL;*/
+                if (p == 0){
 
                         if(execve(lineptr, args, env) == -1)
                                 perror(argv[0]);
@@ -86,8 +84,6 @@ int main(int argc, char **argv)
                         free(lineptr);
                         lineptr = NULL;
                 }
-
         }
-
                 return (0);
 }

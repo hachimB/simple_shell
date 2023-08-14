@@ -9,7 +9,10 @@ void sigint_handler(int signum)
 char *lineptr = NULL;
 (void)signum;
 if (lineptr)
+{
 free(lineptr);
+lineptr = NULL;
+}
 write(STDOUT_FILENO, "\n", 1);
 exit(1);
 }

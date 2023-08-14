@@ -8,10 +8,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+/*char *lineptr = NULL;*/
+void sigint_handler(int signum);
 int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
-char *_strcat(char *dest, char *src);
-void sigint_handler(int signum);
 char** inpToArray(char *inp);
 
 #endif
