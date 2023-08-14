@@ -1,7 +1,6 @@
-#ifndef STRFUNCS
-#define STRFUNCS
+#ifndef STRFUNCS_H
+#define STRFUNCS_H
 
-<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -62,46 +61,22 @@ char **inpToArray(char *inp)
         arr[c != 0 ? c : 1] = NULL;
 
         return (arr);
-=======
-int _strcmp(char *s1, char *s2)
-{
-	int i = 0;
-	int j;
-	
-	while (s1[i] != '\0')
-		i++;
-
-	while (s2[i] != '\0')
-		i++;
-	
-	for (j = 0; j <= i; j++)
-	{
-		if (s1[j] != s2[j])
-		return (s1[j] - s2[j]);
-	}
-
-	return (0);
->>>>>>> e102a26d1522c8987826d8a890dce1c8bc6e92ed
 }
 
 int _strlen(char *s)
 {
-<<<<<<< HEAD
         int i = 0;
         while (s[i] != '\0')
                 i++;
         return (i);
-=======
 	int i = 0;
 	while (s[i] != '\0')
 		i++;
 	return (i);
->>>>>>> e102a26d1522c8987826d8a890dce1c8bc6e92ed
 }
 
 char *_strcat(char *dest, char *src)
 {
-<<<<<<< HEAD
         int i = 0;
         int j = 0;
 
@@ -120,10 +95,8 @@ char *_strcat(char *dest, char *src)
 
         dest[i] = '\0';
         return (dest);
-=======
 	int i = 0;
 	int j = 0;
-	
 	while (dest[i] != '\0')
 	{
 	i++;
@@ -134,12 +107,9 @@ char *_strcat(char *dest, char *src)
 		dest[i] = src[j];
 		i++;
 		j++;
-	
 	}
-	
 	dest[i] = '\0';
 	return (dest);
->>>>>>> e102a26d1522c8987826d8a890dce1c8bc6e92ed
 }
 
 #endif
