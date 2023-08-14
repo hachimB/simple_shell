@@ -1,0 +1,34 @@
+#include "main.h"
+
+/**
+ * inpToArray - input to array
+ * @inp: Input
+ * Return: arr
+ */
+
+
+char **inpToArray(char *inp)
+{
+char *_sp = " ", *i = inp, *tokn, **arr;
+int n = 1, c = 0;
+while (*i)
+{
+if (*i == ' ')
+n++;
+i++;
+}
+tokn = strtok(inp, _sp);
+arr = malloc(sizeof(char) * (n + 1));
+if (arr == NULL)
+{
+free(arr);
+return (NULL);
+}
+while (tokn)
+{
+arr[c] = tokn;
+tokn = strtok(NULL, _sp);
+c++;
+}
+return (arr);
+}
