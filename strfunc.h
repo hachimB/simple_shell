@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <string.h>
 
+<<<<<<< HEAD
 char *lineptr = NULL;
 
 /**
@@ -92,5 +93,11 @@ char *_strcat(char *dest, char *src)
         dest[i] = '\0';
         return (dest);
 }
+=======
+int _strcmp(char *s1, char *s2);
+int _strlen(char *s);
+char **inpToArray(char *inp);
+void sigint_handler(int signum);
+>>>>>>> cb93ffb142793db6df9c565917d7a1ab797914ab
 
 #endif
