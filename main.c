@@ -18,6 +18,7 @@ int main(int argc, char **argv)
 
         signal(SIGINT, sigint_handler);
 
+	signal(SIGTSTP, ststp_handler);
         if (argc != 1)
 	{
                 perror("Arguments Error");

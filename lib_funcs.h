@@ -16,5 +16,6 @@ int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
 char **inpToArray(char *inp);
 void sigint_handler(int signum);
+void ststp_handler(int signum);
 
 #endif
