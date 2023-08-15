@@ -9,9 +9,6 @@
 #include <string.h>
 #include <errno.h>
 
-extern char *_input_line_;
-extern char **environ;
-
 int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
 char **inpToArray(char *inp);
