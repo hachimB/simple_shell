@@ -14,10 +14,11 @@ int main(int argc, char **argv, char **env)
         ssize_t l;
         char **args;
 
-	char *_input_line_ = NULL, *_nospace;
+	char *_input_line_ = NULL, *_nospace_;
 
         signal(SIGINT, sigint_handler);
 
+	signal(SIGTSTP, ststp_handler);
         if (argc != 1)
 	{
                 perror("Arguments Error");
@@ -59,18 +60,19 @@ int main(int argc, char **argv, char **env)
 
                 _input_line_[l - 1] = '\0';
 
-		_nospace = _input_line_;
+		_nospace_ = _input_line_;
 
-		while (*_nospace == ' ')
+		while (*_nospace_ == ' ')
 		{
-			_nospace++;
+			_nospace_++;
 		}
 
-                args = inpToArray(_input_line_);
+                args = inpToArray(_nospace_);
 
-                if (_strcmp("exit", _input_line_) == 0)
+                if (_strcmp("exit", _nospace_) == 0)
                 {
                         free(args);
+			_nospace_ = NULL;
                         free(_input_line_);
                         exit(0);
                 }
@@ -81,15 +83,17 @@ int main(int argc, char **argv, char **env)
                 {
                         perror("Fork");
                         free(args);
+			_nospace_ = NULL;
                         free(_input_line_);
                         exit(1);
                 }
 
                 if (p == 0) {
-                        if(execve(_input_line_, args, env) == -1)
+                        if(execve(_nospace_, args, env) == -1)
                                 perror(argv[0]);
 
                         free(args);
+			_nospace_ = NULL;
                         free(_input_line_);
                         _input_line_ = NULL;
                         exit(127);
@@ -103,6 +107,7 @@ int main(int argc, char **argv, char **env)
                         }
 
                         free(args);
+			_nospace_ = NULL;
                         free(_input_line_);
                         _input_line_ = NULL;
                 }
