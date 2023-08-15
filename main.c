@@ -7,14 +7,14 @@
  * Return: 0 Success
  */
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
         pid_t p;
         size_t n = 0;
         ssize_t l;
         char **args;
 
-	char *_input_line_ = NULL;
+	char *_input_line_ = NULL, *_nospace;
 
         signal(SIGINT, sigint_handler);
 
@@ -59,9 +59,11 @@ int main(int argc, char **argv)
 
                 _input_line_[l - 1] = '\0';
 
-		while (*_input_line_ == ' ')
+		_nospace = _input_line_;
+
+		while (*_nospace == ' ')
 		{
-			_input_line_++;
+			_nospace++;
 		}
 
                 args = inpToArray(_input_line_);
@@ -84,7 +86,7 @@ int main(int argc, char **argv)
                 }
 
                 if (p == 0) {
-                        if(execve(_input_line_, args, environ) == -1)
+                        if(execve(_input_line_, args, env) == -1)
                                 perror(argv[0]);
 
                         free(args);
