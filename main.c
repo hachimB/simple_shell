@@ -4,6 +4,7 @@
  * main - Main function
  * @argc: Arguments count
  * @argv: Arguments
+ * @env: Enviremnt variables
  * Return: 0 Success
  */
 
@@ -12,9 +13,8 @@ int main(int argc, char **argv, char **env)
         pid_t p;
         size_t n = 0;
         ssize_t l;
-        char **args;
-
-	char *_input_line_ = NULL, *_nospace_;
+	unsigned int _cmd_count_ = 1;
+	char **args, *_input_line_ = NULL, *_nospace_, *_str_cc_;
 
         signal(SIGINT, sigint_handler);
 	signal(SIGTSTP, ststp_handler);
@@ -89,12 +89,34 @@ int main(int argc, char **argv, char **env)
                 }
 
                 if (p == 0) {
+			_str_cc_ = int2str(_cmd_count_);
+
                         if(*_nospace_ != '\0' && execve(_nospace_, args, env) == -1)
-                                perror(argv[0]);
+			{
+
+				if (write(STDOUT_FILENO, argv[0], _strlen(argv[0])) < 0 ||
+						write(STDOUT_FILENO, ": ", 2) < 0 ||
+						write(STDOUT_FILENO, _str_cc_, _strlen(_str_cc_)) < 0 ||
+						write(STDOUT_FILENO, ": ", 2) < 0 ||
+						write(STDOUT_FILENO, _nospace_, _strlen(_nospace_)) < 0 ||
+						write(STDOUT_FILENO, ": not found\n", 12) < 0)
+				{
+					perror("Write");
+					free(args);
+					_nospace_ = NULL;
+					free(_input_line_);
+					free(_str_cc_);
+					_str_cc_ = NULL;
+					_input_line_ = NULL;
+					exit(1);
+				}
+			}
 
                         free(args);
 			_nospace_ = NULL;
                         free(_input_line_);
+			free(_str_cc_);
+			_str_cc_ = NULL;
                         _input_line_ = NULL;
                         exit(127);
                 }
@@ -106,6 +128,7 @@ int main(int argc, char **argv, char **env)
                                 exit(1);
                         }
 
+			_cmd_count_++;
                         free(args);
 			_nospace_ = NULL;
                         free(_input_line_);

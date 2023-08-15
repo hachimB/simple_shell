@@ -17,5 +17,6 @@ int _strlen(char *s);
 char **inpToArray(char *inp);
 void sigint_handler(int signum);
 void ststp_handler(int signum);
+char *int2str(unsigned int n);
 
 #endif
