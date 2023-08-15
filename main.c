@@ -19,7 +19,7 @@ int main(int argc, char **argv)
         signal(SIGINT, sigint_handler);
 
         if (argc != 1)
-{
+	{
                 perror("Arguments Error");
                 exit(2);
         }
@@ -58,6 +58,11 @@ int main(int argc, char **argv)
                 }
 
                 _input_line_[l - 1] = '\0';
+
+		while (*_input_line_ == ' ')
+		{
+			_input_line_++;
+		}
 
                 args = inpToArray(_input_line_);
 
