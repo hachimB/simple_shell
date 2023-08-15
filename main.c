@@ -17,8 +17,8 @@ int main(int argc, char **argv, char **env)
 	char *_input_line_ = NULL, *_nospace_;
 
         signal(SIGINT, sigint_handler);
-
 	signal(SIGTSTP, ststp_handler);
+
         if (argc != 1)
 	{
                 perror("Arguments Error");
@@ -89,7 +89,7 @@ int main(int argc, char **argv, char **env)
                 }
 
                 if (p == 0) {
-                        if(execve(_nospace_, args, env) == -1)
+                        if(*_nospace_ != '\0' && execve(_nospace_, args, env) == -1)
                                 perror(argv[0]);
 
                         free(args);
