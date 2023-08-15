@@ -7,6 +7,6 @@
 void ststp_handler(int signum)
 {
 (void)signum;
-write(STDOUT_FILENO, "\n$ ", 3);
+write(STDOUT_FILENO, "", 0);
 fflush(stdout);
 }
