@@ -110,7 +110,7 @@ int main(int argc, char **argv, char **env)
 
 			if(*_nospace_ != '\0' && execve(_nospace_, args, env) == -1)
 			{
-				/if (write(STDOUT_FILENO, argv[0], _strlen(argv[0])) < 0 ||
+				if (write(STDOUT_FILENO, argv[0], _strlen(argv[0])) < 0 ||
 				  write(STDOUT_FILENO, ": ", 2) < 0 ||
 				  write(STDOUT_FILENO, _str_cc_, _strlen(_str_cc_)) < 0 ||
 				  write(STDOUT_FILENO, ": ", 2) < 0 ||
@@ -125,7 +125,7 @@ int main(int argc, char **argv, char **env)
 				  _str_cc_ = NULL;
 				  _input_line_ = NULL;
 				  exit(errno);
-				  }*/
+				  }
 			}
 
 			free(args);
