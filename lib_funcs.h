@@ -1,5 +1,5 @@
-#ifndef STRFUNCS_H
-#define STRFUNCS_H
+#ifndef LIB_FUNCS_H
+#define LIB_FUNCS_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <errno.h>
+
 extern char **environ;
 int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
