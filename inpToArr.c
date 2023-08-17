@@ -8,7 +8,7 @@
 
 char **inpToArray(char *inp)
 {
-char *_sp = " ", *i = inp, *tokn, **arr;
+char *_sp = " \t", *i = inp, *tokn, **arr;
 int n = 1, c = 0;
 while (*i)
 {
