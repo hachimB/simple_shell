@@ -1,7 +1,7 @@
 #include "lib_funcs.h"
 
 /**
- * int2str - integer to string
+ * int2str - integer to string function
  * @n: integer
  * Return: string
  */
