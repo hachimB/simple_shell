@@ -13,7 +13,7 @@ int main(int argc, char **argv, char **env)
 	pid_t _pid;
 	size_t n = 0;
 	ssize_t l;
-	int mode = isatty(0), __status__;
+	int mode = isatty(0), _status;
 	unsigned int _cmd_count_ = 1;
 	char **args, *_input_line_ = NULL, *_nospace_, *_str_cc_;
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	
+
 	while(1)
 	{
 		if (mode)
@@ -40,12 +40,12 @@ int main(int argc, char **argv, char **env)
 				perror("Allocation failed");
 				exit(EXIT_FAILURE);
 			}
-			if (errno != 0)
+			/*if (errno != 0)
 				{
 					perror("Error");
 					free(_input_line_);
 					exit(EXIT_FAILURE);
-				}
+				}*/
 			if (mode == 1)
 			{
 				if(write(STDOUT_FILENO, "\n", 1) < 0)
@@ -57,7 +57,6 @@ int main(int argc, char **argv, char **env)
 			}
 
 			free(_input_line_);
-
 			exit(errno);
 		}
 
@@ -72,7 +71,6 @@ int main(int argc, char **argv, char **env)
 
 		if (_strcmp("exit", _nospace_) == 0)
 		{
-			
 			free(args);
 			_nospace_ = NULL;
 			free(_input_line_);
@@ -88,8 +86,8 @@ int main(int argc, char **argv, char **env)
 			perror("Fork");
 			free(args);
 			free(_input_line_);
-
 			_nospace_ = NULL;
+
 			exit(EXIT_FAILURE);
 		}
 
@@ -119,17 +117,17 @@ int main(int argc, char **argv, char **env)
 			free(_str_cc_);
 			errno = 127;
 			_nospace_ = _str_cc_ = _input_line_ = NULL;
+
 			exit(127);
 		}
 		else
 		{
-			if(wait(&__status__) == -1)
+			if(wait(&_status) == -1)
 			{
 				perror("Wait");
 				exit(EXIT_FAILURE);
 			}
 
-			
 			_cmd_count_++;
 			free(args);
 			free(_input_line_);
