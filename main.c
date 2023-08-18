@@ -13,7 +13,7 @@ int main(int argc, char **argv, char **env)
 	pid_t _pid;
 	size_t n = 0;
 	ssize_t l;
-	int mode = isatty(0), _status;
+	int mode = isatty(0), _status, _ch_exit_status;
 	unsigned int _cmd_count_ = 1;
 	char **args, *_input_line_ = NULL, *_nospace_, *_str_cc_;
 
@@ -30,7 +30,7 @@ int main(int argc, char **argv, char **env)
 			if(write(STDOUT_FILENO, "$ ", 2) < 0)
 			{
 				perror("Write");
-				exit(EXIT_FAILURE);
+				continue;
 			}
 		}
 		if ((l = getline(&_input_line_, &n, stdin)) == -1)
@@ -52,7 +52,7 @@ int main(int argc, char **argv, char **env)
 				{
 					perror("Write");
 					free(_input_line_);
-					exit(EXIT_FAILURE);
+					continue;
 				}
 			}
 
@@ -110,31 +110,34 @@ int main(int argc, char **argv, char **env)
 				  	_nospace_ = _str_cc_ = _input_line_ = NULL;
 				  	exit(EXIT_FAILURE);
 				  }
+
 			}
 			
 			free(args);
 			free(_input_line_);
 			free(_str_cc_);
-			errno = 127;
 			_nospace_ = _str_cc_ = _input_line_ = NULL;
 
 			exit(127);
 		}
-		else
+			
+		if(wait(&_status) == -1)
 		{
-			if(wait(&_status) == -1)
-			{
-				perror("Wait");
-				exit(EXIT_FAILURE);
-			}
-
-			_cmd_count_++;
-			free(args);
-			free(_input_line_);
-			errno = __status__;
-			_input_line_ = _nospace_ = NULL;
-
+			perror("Wait");
+			exit(EXIT_FAILURE);
 		}
+
+		if (WIFEXITED(_status))
+		{
+			_ch_exit_status = WEXITSTATUS(_status);
+		}
+
+		_cmd_count_++;
+		free(args);
+		free(_input_line_);
+		errno = _ch_exit_status;
+		
+		_input_line_ = _nospace_ = NULL;
 
 	}
 
