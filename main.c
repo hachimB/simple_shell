@@ -22,8 +22,7 @@ int main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-
-	while(1)
+ 	while(1)
 	{
 		if (mode)
 		{
@@ -78,6 +77,12 @@ int main(int argc, char **argv, char **env)
 
 			exit(errno);
 		}
+
+		/*if (_strcmp("env", _nospace_) == 0)
+                {
+			d_env();
+
+			}*/
 
 		_pid = fork();
 
