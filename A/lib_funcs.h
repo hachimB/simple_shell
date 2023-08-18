@@ -19,5 +19,6 @@ char *int2str(unsigned int n);
 char *_getenv(const char *name);
 void printerr(char *prgm, char* cmd_C, char *cmd);
 void free_args(char **args);
+void d_env(void);
 
 #endif

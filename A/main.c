@@ -76,6 +76,13 @@ int main(int argc, char **argv, char **env)
 
 			exit(errno);
 		}
+		else if (_strcmp("env", _nospace_) == 0)
+		{
+			d_env();
+			_cmd_count_++;
+			
+			continue;
+		}
 
 		if (access(_nospace_, X_OK) == 0)
 		{
