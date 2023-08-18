@@ -17,5 +17,7 @@ void sigint_handler(int signum);
 void ststp_handler(int signum);
 char *int2str(unsigned int n);
 char *_getenv(const char *name);
+void printerr(char *prgm, char* cmd_C, char *cmd);
+void free_args(char **args);
 
 #endif
