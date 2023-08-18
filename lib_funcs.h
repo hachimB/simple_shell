@@ -17,5 +17,6 @@ void sigint_handler(int signum);
 void ststp_handler(int signum);
 char *int2str(unsigned int n);
 char *_getenv(const char *name);
+void d_env(void);
 
 #endif
