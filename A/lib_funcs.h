@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <errno.h>
+#include <stdarg.h>
 
 extern char **environ;
 int _strcmp(char *s1, char *s2);
@@ -19,6 +20,6 @@ char *int2str(unsigned int n);
 char *_getenv(const char *name);
 void printerr(char *prgm, char* cmd_C, char *cmd);
 void free_args(char **args);
-void d_env(void);
+int d_env(char **env);
 
 #endif
