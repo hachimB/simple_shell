@@ -84,7 +84,6 @@ int main(int argc, char **argv, char **env)
 			_nospace_++;
 
 		args = inpToArray(_nospace_);
-		_cmd_count_++;
 
 		if (_strcmp("exit", _nospace_) == 0)
 		{
@@ -92,7 +91,8 @@ int main(int argc, char **argv, char **env)
 			_input_line_ = NULL;
 			exit(_cmd_count_ ? errno : 0);
 		}
-		else if (_strcmp("env", _nospace_) == 0)
+		_cmd_count_++;
+		if (_strcmp("env", _nospace_) == 0)
 		{
 			d_env(env);
 			continue;
