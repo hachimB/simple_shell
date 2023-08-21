@@ -3,13 +3,16 @@
  * d_env - displays the env.
  * Return: nothing.
  */
-void d_env(void)
+int d_env()
 {
-int i = 0;
-while (environ[i] != NULL)
-{
-write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
-write(STDOUT_FILENO, "\n", 1);
-i++;
-}
+    int i = 0;
+    while (__environ[i] != NULL)
+    {
+        write(STDOUT_FILENO, __environ[i], _strlen(__environ[i]));
+        write(STDOUT_FILENO, "\n", 1);
+
+        i++;
+    }
+
+    return (i);
 }
