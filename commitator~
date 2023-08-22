@@ -1,0 +1,12 @@
+#!/bin/bash
+desired_commit_count=57  # Change to 55 if needed
+
+# Loop to create additional commits
+for ((i=1; i<=$desired_commit_count - 20; i++)); do
+    echo "Creating additional commit $i"
+    touch f
+    git add f
+    git commit -m "Additional commit $i"
+    git push
+    rm f
+done
