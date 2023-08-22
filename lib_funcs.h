@@ -38,6 +38,8 @@ char *_getenv(const char *name);
 
 /* PRINTING ERROR's */
 void printerr(char *prgm, char *cmd_C, char *cmd, char *err, char *err1);
+
+/* MEMORY FREEING FUNCTIONS */
 void superFree_(char **_ARR_);
 void frees(char ***PDIR, char ***ARGS, char **path, ...);
 
