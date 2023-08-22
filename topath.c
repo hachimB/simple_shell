@@ -16,9 +16,9 @@ while (*_PATHDIR_)
 _CONC = malloc(_strlen(*_PATHDIR_) + _strlen(cmd) + 2);
 if (!_CONC)
 return (NULL);
-strcpy(_CONC, *_PATHDIR_);
-strcat(_CONC, "/");
-strcat(_CONC, cmd);
+_strcpy(_CONC, *_PATHDIR_);
+_strcat(_CONC, "/");
+_strcat(_CONC, cmd);
 if (access(_CONC, F_OK) == 0)
 {
 *_notValidCMD_ = 1;
@@ -28,7 +28,7 @@ free(_CONC);
 _CONC = NULL;
 _PATHDIR_++;
 }
-_CONC = strdup(cmd);
+_CONC = _strdup(cmd);
 *_notValidCMD_ = 0;
 return (_CONC);
 }

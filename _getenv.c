@@ -14,7 +14,7 @@ if (name == NULL || environ == NULL)
 {
 return (NULL);
 }
-name_length = strlen(name);
+name_length = _strlen((char *)name);
 for (i = 0; environ[i] != NULL; i++)
 {
 c_env = environ[i];
