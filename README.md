@@ -1,6 +1,6 @@
 SIMPLE SHELL PROJECT. 
 
-<style color="red">
+<font color="red">
 *by <Hachim Boubacar **/** Abderrahmane Nezhari>*
-  </style>
+</font>
 
