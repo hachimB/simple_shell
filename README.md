@@ -1,3 +1,3 @@
-SIMPLE SHELL PROJECT. 
+SIMPLE SHELL PROJECT./n
 *~by @Hachim Boubacar **/** Abderrahmane Nezhari*
 
