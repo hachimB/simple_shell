@@ -4,149 +4,46 @@
  * main - Main function
  * @argc: Arguments count
  * @argv: Arguments
- * @env: Enviremnt variables
+ * @env: Environment variables
  * Return: 0 Success
  */
-
-void frees(char **PDIR, char **ARGS, char *path, ...)
-{
-	char *farg;
-
-	va_list vl;
-	va_start(vl, path);
-
-	superFree_(PDIR);
-	free(path);
-	superFree_(ARGS);
-
-	farg = va_arg(vl, char *);
-
-	while (farg)
-	{
-		free(farg);
-		farg = va_arg(vl, char *);
-	}
-
-	va_end(vl);
-}
 
 int main(int argc, char **argv, char **env)
 {
 	pid_t _pid;
-	size_t n = 0;
-	ssize_t l;
-	int mode = isatty(0), _status, _ch_exit_status, isValidCMD = 0;
-	unsigned int _cmd_count_ = 0, envLen = 0;
-	char **args, *_INPUT__ = NULL, *_str_cc_, *_PATH = _getenv("PATH") ? _getenv("PATH") : "_",
-				 **_PATHDIR_, *path;
+	size_t iptl = 0;
+	ssize_t __length;
+	int _MODE_ = isatty(0), _status, _ch_exit_status, isValidCMD = 0;
+	unsigned int _cmdsCount_ = 0, _ = 1;
+	char **_args__, **_PATHDIR_, *_path__,
+		*_INPUT__ = NULL, *_str_cc_, *PATH_ = _getenv("PATH") ? _getenv("PATH") : "_";
 
-	signal(SIGINT, sigint_handler);
-	signal(SIGTSTP, ststp_handler);
-	(void)argc;
-	while (1)
+	(void) argc;
+
+	signal(SIGINT, sigint_handler), signal(SIGTSTP, ststp_handler);
+
+	while ( !!_++ )
 	{
-		if (mode)
-			write(STDOUT_FILENO, "$ ", 2);
-
-		if ((l = getline(&_INPUT__, &n, stdin)) == -1)
+		if (_MODE_) write(STDOUT_FILENO, "$ ", 2);
+		if ((__length = getline(&_INPUT__, &iptl, stdin)) == -1)
 		{
-			if (mode)
-				write(STDOUT_FILENO, "\n", 1);
-
-			free(_INPUT__);
-			exit(errno);
+			if (_MODE_) write(STDOUT_FILENO, "\n", 1);
+			free(_INPUT__), exit(errno);
 		}
+		_args__ = toArray(_INPUT__, " \t\n"), _PATHDIR_ = toArray(PATH_, ":");
+		_path__ = toPath(_PATHDIR_, _args__[0], &isValidCMD);
+		_cmdsCount_++;
 
-		while (*env)
-			envLen++, env++;
-
-		args = toArray(_INPUT__, " \t\n");
-		_PATHDIR_ = toArray(_PATH, ":");
-
-		path = toPath(_PATHDIR_, args[0], &isValidCMD);
-
-		_cmd_count_++;
-
-		if (_strcmp("exit", args[0]) == 0)
-		{
-			if (args[1])
-			{
-				if (str2int(args[1]) >= 0)
-				{
-					errno = str2int(args[1]);
-					frees(_PATHDIR_, args, path, _INPUT__, NULL);
-					_PATHDIR_ = args = (char **)NULL;
-					path = _INPUT__ = (char *)NULL;
-					exit(errno);
-				}
-				_str_cc_ = int2str(_cmd_count_);
-				printerr(argv[0], _str_cc_, args[0], ": Illegal number: ", args[1]);
-				frees(_PATHDIR_, args, path, _INPUT__, _str_cc_, NULL);
-				_PATHDIR_ = args = (char **)NULL;
-				path = _INPUT__ = _str_cc_ = (char *)NULL;
-				errno = 2;
-				continue;
-			}
-
-			frees(_PATHDIR_, args, path, _INPUT__, NULL);
-			_PATHDIR_ = args = (char **)NULL;
-			path = _INPUT__ = (char *)NULL;
-			exit(_cmd_count_ != 1 ? errno : 0);
-		}
-		if (_strcmp("env", args[0]) == 0)
-		{
-			d_env();
-			errno = 0;
-			frees(_PATHDIR_, args, path, _INPUT__, NULL);
-			_PATHDIR_ = args = (char **)NULL;
-			path = _INPUT__ = (char *)NULL;
+		if (__builtIn__(&_PATHDIR_, &_args__, &argv, &_path__, &_INPUT__, &_str_cc_, &_cmdsCount_)
+		|| __handleInvalidCMD__(&_PATHDIR_,&_args__,&argv,&_path__,&_str_cc_,
+		&_INPUT__,&PATH_,&isValidCMD,&_cmdsCount_))
 			continue;
-		}
 
-		if (access(path, F_OK) != 0 || *args[0] == '\0' || (_strcmp(_PATH, "_") == 0 && *path != '/' && !isValidCMD))
-		{
-			errno = 0;
-
-			if (*args[0] != '\0')
-			{
-				_str_cc_ = int2str(_cmd_count_);
-				printerr(argv[0], _str_cc_, args[0], ": not found", NULL);
-				free(_str_cc_);
-				_str_cc_ = NULL;
-				errno = 127;
-			}
-			frees(_PATHDIR_, args, path, _INPUT__, NULL);
-			_PATHDIR_ = args = (char **)NULL;
-			path = _INPUT__ = (char *)NULL;
-			continue;
-		}
-		_pid = fork();
-		if (_pid < 0)
-		{
-			perror("Fork"), frees(_PATHDIR_, args, path, _INPUT__, NULL);
-			_PATHDIR_ = args = (char **)NULL;
-			path = _INPUT__ = _str_cc_ = (char *)NULL;
-			exit(EXIT_FAILURE);
-		}
-		if (_pid == 0)
-		{
-			if (execve(path, args, env) == -1)
-			{
-
-				frees(_PATHDIR_, args, path, _INPUT__, NULL);
-				_PATHDIR_ = args = (char **)NULL;
-				path = _INPUT__ = (char *)NULL;
-				exit(2);
-			}
-		}
-
-		wait(&_status);
-		if (WIFEXITED(_status))
-			_ch_exit_status = WEXITSTATUS(_status);
-		errno = _ch_exit_status;
-		frees(_PATHDIR_, args, path, _INPUT__, NULL);
-		_PATHDIR_ = args = (char **)NULL;
-		path = _INPUT__ = (char *)NULL;
+		__startForkin__(
+			&_pid,
+			&_PATHDIR_, &_args__, &env,
+			&_path__, &_INPUT__,
+			&_status, &_ch_exit_status);
 	}
 	return (0);
 }
