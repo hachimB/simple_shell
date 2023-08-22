@@ -33,7 +33,7 @@ char *toPath(char **_PDIR_, char *cmd, int *_notValidCMD_);
 char *onlyCMD(char *_cmd);
 
 /* ENVIRONMENT VARIABLES FUNCTIONS*/
-int d_env();
+int d_env(void);
 char *_getenv(const char *name);
 
 /* PRINTING ERROR's */
@@ -45,20 +45,19 @@ void frees(char ***PDIR, char ***ARGS, char **path, ...);
 
 /** CODE ASSEMBLING FUNCTIONS **/
 int __builtIn__(
-    char ***_PATHDIR_, char ***args, char ***argv,
-    char **path, char **_INPUT__, char **_str_cc_,
-    unsigned int *_cmd_count_);
+char ***_PATHDIR_, char ***args, char ***argv,
+char **path, char **_INPUT__, char **_str_cc_,
+unsigned int *_cmd_count_);
 
 void __startForkin__(
-    pid_t *_pid,
-    char ***_PATHDIR_, char ***args, char ***env,
-    char **path, char **_INPUT__,
-    int *_status, int *_ch_exit_status);
+pid_t *_pid,
+char ***_PATHDIR_, char ***args, char ***env,
+char **path, char **_INPUT__,
+int *_status, int *_ch_exit_status);
 
 int __handleInvalidCMD__(
-    char ***_PATHDIR_, char ***args, char ***argv,
-    char **path, char **_str_cc_, char **_INPUT__, char **_PATH,
-    int *isValidCMD,
-    unsigned int *_cmd_count_);
+char ***_PATHDIR_, char ***args, char ***argv,
+char **path, char **_str_cc_, char **_INPUT__, char **_PATH,
+int *isValidCMD, unsigned int *_cmd_count_);
 
 #endif
