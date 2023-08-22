@@ -1,0 +1,4 @@
+A simple implementation of the UNIX SHELL (Bash).
+Can execute every command, but not built-ins (except env and exit).
+By  @Hachim Boubcar (Contributator 1)
+And @Abderrahmane Nezhari (Contributator 2) 
