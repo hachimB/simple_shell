@@ -27,10 +27,9 @@ char **inpToArray(char *inp);
 char *_getenv(const char *name);
 void printerr(char *prgm, char* cmd_C, char *cmd, char *err, char *err1);
 void superFree_(char **_ARR_);
-int d_env(void);
+int d_env();
 char **toArray(char *str, char *_sep_);
-char *toPath(char **_PDIR_, char *cmd);
-void free_args(char **args);
-void frees(char **args, ...);
+char *toPath(char **_PDIR_, char *cmd, int *_notValidCMD_);
+char *onlyCMD(char *_cmd);
 
 #endif
