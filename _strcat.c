@@ -1,4 +1,4 @@
-#include "lib_funcs.h"
+#include "../lib_funcs.h"
 /**
  * _strcat - concatenates two strings.
  *
