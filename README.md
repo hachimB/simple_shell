@@ -1,4 +1,4 @@
 SIMPLE SHELL PROJECT. 
 
-*~by @Hachim Boubacar **/** Abderrahmane Nezhari*
+*by <@Hachim Boubacar **/** @Abderrahmane Nezhari>*
 
