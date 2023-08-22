@@ -1,4 +1,2 @@
-SIMPLE SHELL PROJECT. 
-
-<font color="red"> *by <Hachim Boubacar **/** Abderrahmane Nezhari>* </font>
-
+##SIMPLE SHELL PROJECT. 
+<*by <Hachim Boubacar **/** Abderrahmane Nezhari>*
