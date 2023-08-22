@@ -1,4 +1,4 @@
-#include "../lib_funcs.h"
+#include "lib_funcs.h"
 /**
  * _strcmp - compares two strings.
  * @s1: first string
