@@ -15,7 +15,7 @@ while (*s)
 s++;
 }
 s--;
-while (*s)
+while (*s != *str)
 {
 if (*s < '0' || *s > '9')
 return (-1);
